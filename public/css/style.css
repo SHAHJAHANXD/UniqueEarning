@@ -1,0 +1,233 @@
+/* Normal desktop :1200px. */
+
+
+/* Normal desktop :992px. */
+
+
+/* Tablet desktop :768px. */
+
+
+/* small mobile :320px. */
+
+@import url("https://fonts.googleapis.com/css2?family=Muli:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap");
+
+/* line 1, H:/admin_project/finance/scss/_extends.scss */
+
+.CRM_dropdown.dropdown .dropdown-toggle:hover,
+.CRM_dropdown.dropdown .dropdown-toggle:focus {
+    background: -webkit-gradient(linear, left top, right top, from(#7C32FF), color-stop(70%, #A235EC), to(#C738D8));
+    background: -o-linear-gradient(left, #7C32FF 0%, #A235EC 70%, #C738D8 100%);
+    background: linear-gradient(90deg, #7C32FF 0%, #A235EC 70%, #C738D8 100%);
+}
+
+
+/**************** common css start ****************/
+
+
+/* line 3, H:/admin_project/finance/scss/_reset.scss */
+
+body {
+    font-family: "Muli", sans-serif;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    background: #F7FAFF;
+}
+
+@media (min-width: 1200px) {
+    /* line 12, H:/admin_project/finance/scss/_reset.scss */
+    .container {
+        max-width: 1310px;
+    }
+}
+
+
+/* line 69, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element h4 {
+    margin-bottom: 30px;
+}
+
+
+/* line 72, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .quick_activity_wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 575.98px) {
+    /* line 72, H:/admin_project/finance/scss/_main_content.scss */
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 15px;
+        margin-bottom: 30px;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    /* line 72, H:/admin_project/finance/scss/_main_content.scss */
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+        margin-bottom: 30px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* line 72, H:/admin_project/finance/scss/_main_content.scss */
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 15px;
+        margin-bottom: 30px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* line 72, H:/admin_project/finance/scss/_main_content.scss */
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 30px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+    /* line 72, H:/admin_project/finance/scss/_main_content.scss */
+    .single_element .quick_activity_wrap {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* line 100, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity {
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    padding: 41px 30px;
+    position: relative;
+    background: #3B76EF;
+}
+
+
+/* line 107, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity:nth-child(2) {
+    background: #63C7FF;
+}
+
+
+/* line 110, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity:nth-child(3) {
+    background: #A66DD4;
+}
+
+
+/* line 113, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity:nth-child(4) {
+    background: #6DD4B1;
+}
+
+
+/* line 116, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    background-size: cover;
+}
+
+@media (max-width: 575.98px) {
+    /* line 100, H:/admin_project/finance/scss/_main_content.scss */
+    .single_element .single_quick_activity {
+        padding: 20px 15px;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    /* line 100, H:/admin_project/finance/scss/_main_content.scss */
+    .single_element .single_quick_activity {
+        padding: 20px 15px;
+    }
+}
+
+
+/* line 143, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity h4 {
+    font-size: 17px;
+    margin-bottom: 0;
+    font-weight: 700;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+
+/* line 151, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity h3 {
+    font-size: 30px;
+    line-height: 40px;
+    margin-bottom: 0;
+    font-weight: 900;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    color: #fff;
+    margin-bottom: 7px;
+}
+
+
+/* line 160, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity p {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    font-size: 13px;
+    font-weight: 400;
+    color: #fff;
+}
+
+
+/* line 166, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity:hover {
+    background: #3B76EF;
+}
+
+
+/* line 168, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity:hover::before {
+    background-image: url(../img/diamond.png);
+}
+
+
+/* line 174, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity:hover .quick_activity_icon {
+    background-color: rgba(255, 247, 248, 0.2);
+}
+
+
+/* line 176, H:/admin_project/finance/scss/_main_content.scss */
+
+.single_element .single_quick_activity:hover .quick_activity_icon i {
+    color: #ffffff;
+}
