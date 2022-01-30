@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PaidAdds;
+use App\Models\User;
 use App\Models\WatchAdds;
 use App\Models\withdraw;
 use App\Models\WithdrawHistory;
@@ -51,7 +52,7 @@ class WithdrawController extends Controller
     {
         $update_id = $request->email;
         if (isset($update_id) && !empty($update_id)) {
-            $user = withdraw::where('email', $update_id)->latest()->First();
+            $user = User::where('email', $update_id)->latest()->First();
             $user->email = $update_id;
             $user->total_amount = $request->amount;
             $user->save();
@@ -74,7 +75,7 @@ class WithdrawController extends Controller
     {
         $update_id =  Auth::guard('web')->user()->email;
         if (isset($update_id) && !empty($update_id)) {
-            $user = withdraw::where('email', $update_id)->latest()->first();
+            $user = User::where('email', $update_id)->latest()->first();
             if (isset($user) && !empty($user)) {
                 $user->amount = 0.04;
                 $user->total_amount = $user->total_amount + $user->amount;
@@ -114,7 +115,7 @@ class WithdrawController extends Controller
     {
         $update_id =  Auth::guard('web')->user()->email;
         if (isset($update_id) && !empty($update_id)) {
-            $user = withdraw::where('email', $update_id)->latest()->first();
+            $user = User::where('email', $update_id)->latest()->first();
             if (isset($user) && !empty($user)) {
                 $user->amount = 0.001;
                 $user->total_amount = $user->total_amount + $user->amount;
@@ -177,7 +178,7 @@ class WithdrawController extends Controller
     public function edit(Request $request, $email)
     {
         $email = Auth::guard('web')->user()->email ?? '';
-        $wit = withdraw::where('email', $email)->latest()->first();
+        $wit = User::where('email', $email)->latest()->first();
 
         $user = withdraw::find($email);
         return view('user.withdraw', compact('user', 'wit'));

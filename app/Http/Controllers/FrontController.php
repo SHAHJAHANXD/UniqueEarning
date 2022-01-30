@@ -54,7 +54,7 @@ class FrontController extends Controller
         $indexxx = PaidAdds::where('email', Auth::guard('web')->user()->email)->get();
         $index = User::where('id', Auth::guard('web')->user()->id)->get();
         $indexx = WatchAdds::where('email', Auth::guard('web')->user()->email)->get();
-        $email = withdraw::where('email', Auth::guard('web')->user()->email)->get();
+        $email = User::where('email', Auth::guard('web')->user()->email)->get();
         $user = Investment::where('userid', Auth::guard('web')->user()->id)->latest()->first();
         $users = WithdrawHistory::where('user_id', Auth::guard('web')->user()->id)->latest()->first();
         return view('user.dashboard', compact('user', 'email', 'index', 'indexx', 'users', 'indexxx'));
@@ -104,6 +104,7 @@ class FrontController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $update_id = Auth::guard('web')->user()->id ?? '';
@@ -122,6 +123,7 @@ class FrontController extends Controller
             $user->country = $request->country;
             $user->number = $request->number;
             $user->city = $request->city;
+            $user->refer = mt_rand(100000,999999);
             $user->save();
             return redirect()->back()->with('Success', 'Account Upated Successfully!');
         } else {
@@ -130,7 +132,7 @@ class FrontController extends Controller
                     'fname' => 'required|alpha',
                     'lname' => 'required|alpha',
                     'email' => 'required|email|unique:users,email',
-                    'password' => 'required|min:6'
+                    'password' => 'required|min:6',
                 ],
                 [
                     'fname.required' => 'Frist name is required',
@@ -140,55 +142,130 @@ class FrontController extends Controller
                     'email.required' => 'Email is required',
                 ]
             );
-            $cookie = Cookie::get('referral');
-
-            $referred_by = $cookie ? Hashids::decode($cookie)[0] : null;
 
             $email = $request->email;
             $user =  new User();
             $user->fname = $request->fname;
             $user->lname = $request->lname;
-            $user->email = $request->email;
+            $user->email = $email;
             $user->password = Hash::make($request->password);
             $user->reference = mt_rand(1000000, 9999999);
-            $user->referred_by = $referred_by;
+            $user->refer = 'https://uniqueearning.com/register/ref/'. mt_rand(1000000, 9999999);
             $user->save();
             $okay = $request->email;
-            if ($this->sendReset($okay)) {
+            $ref = $request->ref;
+            if ($this->sendReset($okay, $ref)) {
                 return redirect()->back()->with('success', trans('Account Created Successfully!'));
             }
         }
     }
-    public function sendReset($okay)
+    public function refstore(Request $request)
+    {
+        $ref = $request->ref;
+            $request->validate(
+                [
+                    'fname' => 'required|alpha',
+                    'lname' => 'required|alpha',
+                    'email' => 'required|email|unique:users,email',
+                    'password' => 'required|min:6'
+                ],
+                // [
+                //     'fname.required' => 'Frist name is required',
+                //     'fname.alpha' => 'Frist name must only contain letters',
+                //     'lname.required' => 'Last name is required',
+                //     'lname.regex' => 'Last name only contain letters',
+                //     'email.required' => 'Email is required',
+                // ]
+            );
+            $email = $request->email;
+            $user =  new User();
+            $user->fname = $request->fname;
+            $user->lname = $request->lname;
+            $user->email = $email;
+            $user->password = Hash::make($request->password);
+            $user->refer = 'https://uniqueearning.com/register/ref/'. mt_rand(1000000, 9999999);
+            $user->save();
+            if ($this->saveReferal($email, $ref)) {
+                return redirect()->back()->with('success', trans('Account Created Successfully!'));
+            }
+    }
+    public function saveReferal($email,$ref)
+    {
+        $update_id =  $ref;
+        if (isset($update_id) && !empty($update_id)) {
+            $user = User::where('refer', $update_id)->latest()->first();
+
+                $user->ref1 = $user->ref1+1;
+                $user->total_amount = '0.4';
+                $user->save();
+        }
+        if ($this->sendResett($email)) {
+            return redirect()->back()->with('success', trans(''));
+        }
+    }
+    public function sendResett($email)
+    {
+        $userr = new withdraw();
+        $userr->email = $email;
+        $userr->total_amount = '0.04';
+        $userr->save();
+        if ($this->saveUserIdd($email)) {
+            return redirect()->back()->with('success', trans(''));
+        }
+    }
+    public function saveUserIdd($email)
+    {
+        $userr = new WatchAdds();
+        $userr->email = $email;
+        $userr->adds = 25;
+        $userr->money = 26;
+        $userr->save();
+        if ($this->paidsaveUserIdd($email)) {
+            return redirect()->back()->with('success', trans(''));
+        }
+    }
+    public function paidsaveUserIdd($email)
+    {
+        $userr = new PaidAdds();
+        $userr->email = $email;
+        $userr->adds = 25;
+        $userr->money = 26;
+        $userr->save();
+
+        return redirect()->back()->with('success', trans(''));
+    }
+    public function sendReset($okay, $ref)
     {
         $userr = new withdraw();
         $userr->email = $okay;
         $userr->save();
-        if ($this->saveUserId($okay)) {
+        if ($this->saveUserId($okay, $ref)) {
             return redirect()->back()->with('success', trans(''));
         }
     }
-    public function saveUserId($okay)
+    public function saveUserId($okay, $ref)
     {
         $userr = new WatchAdds();
         $userr->email = $okay;
         $userr->adds = 25;
         $userr->money = 26;
         $userr->save();
-        if ($this->paidsaveUserId($okay)) {
+        if ($this->paidsaveUserId($okay, $ref)) {
             return redirect()->back()->with('success', trans(''));
         }
     }
 
-    public function paidsaveUserId($okay)
+    public function paidsaveUserId($okay, $ref)
     {
         $userr = new PaidAdds();
         $userr->email = $okay;
         $userr->adds = 25;
         $userr->money = 26;
         $userr->save();
-        return redirect()->back()->with('success', 'Account Created Successfully!');
+        return redirect()->back()->with('success', trans(''));
+
     }
+
     public function referenceStore(Request $request)
     {
 
@@ -249,10 +326,12 @@ class FrontController extends Controller
         return redirect()->route('login')->with('error', 'Email or Password is Invalid!');
     }
 
-    public function referral()
+    public function referral($ref)
     {
-        return 'https://uniqueearning.com/?ref=' . \Hashids::encode(Auth::guard('web')->user()->id);
+        return view('user.ref');
     }
+
+
     public function sendResetEmail1()
     {
         $userr = new withdraw();

@@ -94,19 +94,16 @@
             <li class="nav-item active">
                 <a class="nav-link coll" href="/">Home <span class="sr-only">(current)</span></a>
               </li>
-              
+
             <li class="nav-item active">
               <a class="nav-link coll" href="/make-deposit">Make Deposit <span class="sr-only">(current)</span></a>
             </li>
-             
+
                 @if(Auth::guard('web')->check() === true)
                 @if(Auth::guard('web')->user()->statuss == '1')
 
                   <li class="nav-item active">
                     <a class="nav-link coll" href="/user-dashboard">Dashboard<span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="nav-item active">
-                    <a class="nav-link coll" href="/user-reference">Add Refral Link<span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item active">
                     <a class="nav-link coll " href="/watchadds">Watch Adds <span class="sr-only">(current)</span></a>
@@ -150,7 +147,7 @@
                   <a class="nav-link coll " href="/contact-us">Contact Us <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link coll " href="/login">Login <span class="sr-only">(current)</span></a>
+                  <a class="nav-link coll " href="{{ route('login') }}">Login <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link coll " href="/register">Register <span class="sr-only">(current)</span></a>

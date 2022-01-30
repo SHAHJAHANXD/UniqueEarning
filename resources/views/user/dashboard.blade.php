@@ -83,12 +83,14 @@
                                     @endforeach
                                     @endisset
                                 </div>
-                                <a href="/referral-link">
                                     <div class="single_quick_activity">
-                                        <h4>Get Referal Link</h4>
-                                        <h3>Click Here</h3>
+                                        <h4>Your Referal Link</h4>
+                                        <h2 style="color: white;"> @isset($index)
+                                            @foreach ($index as $user )
+                                                {{ $user->refer }}
+                                            @endforeach
+                                            @endisset</h2>
                                     </div>
-                                </a>
 
                                 <div class="single_quick_activity">
                                     <h4>Daily Adds</h4>

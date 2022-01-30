@@ -75,7 +75,7 @@ Route::get('/saveUserId', [FrontController::class, 'saveUserId']);
 });
 
 Route::get('/', [FrontController::class, 'index']);
-Route::get('/login', [FrontController::class, 'login'])->name('login');
+Route::get('/login-u', [FrontController::class, 'login'])->name('login');
 Route::get('/register', [FrontController::class, 'register']);
 Route::get('/about-us', [FrontController::class, 'about']);
 Route::get('/contact-us', [FrontController::class, 'contact']);
@@ -83,13 +83,16 @@ Route::post('/contact', [ContactController::class, 'reach_us']);
 Route::get('/forget-password', [FrontController::class, 'forget']);
 Route::post('/checkemail', [FrontController::class, 'checkemail']);
 
-Route::get('/referral-link',  [FrontController::class, 'referral']);
+Route::get('/register/ref/{ref}',  [FrontController::class, 'referral']);
 Route::get('/referrer', [FrontController::class, 'referrer']);
 Route::get('/referrals',  [FrontController::class, 'referrals']);
 
 Route::get('/make-deposit', [FrontController::class, 'deposit']);
 
 Route::post('/add-user', [FrontController::class, 'store']);
+
+Route::post('/add-ref-user', [FrontController::class, 'refstore']);
+
 Route::post('/add-user/{id}', [FrontController::class, 'store']);
 
 Route::post('/login-user', [FrontController::class, 'authenticate']);

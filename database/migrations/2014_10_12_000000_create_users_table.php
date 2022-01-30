@@ -22,11 +22,15 @@ class CreateUsersTable extends Migration
             $table->string('number')->nullable();
             $table->string('city')->nullable();
             $table->string('reference')->nullable();
+            $table->string('refer')->nullable();
             $table->string('password');
             $table->string('ref')->default(0)->nullable();
             $table->string('ref1')->default(0)->nullable();
             $table->string('user_status')->default(1);
             $table->unsignedInteger('referred_by')->nullable();
+            $table->unsignedInteger('total_amount')->nullable();
+            $table->unsignedInteger('withdraw_amount')->nullable();
+            $table->unsignedInteger('amount')->nullable();
             $table->string('statuss')->default(0);
             $table->string('status')->default(1);
             $table->string('stats')->default(1);
